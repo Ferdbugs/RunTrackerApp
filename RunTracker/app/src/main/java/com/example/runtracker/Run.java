@@ -7,6 +7,7 @@ public class Run {
     float distance;
     long duration;
     float speed;
+    float bestSpeed;
     String type;
     double initialLocationLAT;
     double initialLocationLONG;
@@ -100,4 +101,5 @@ public class Run {
     public void setFinalLocationLONG(double finalLocationLONG) {
         this.finalLocationLONG = finalLocationLONG;
     }
+
 }

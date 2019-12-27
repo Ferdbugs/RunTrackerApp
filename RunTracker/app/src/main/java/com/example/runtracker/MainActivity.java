@@ -10,7 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
 
-    Button Map, Progress;                                   //Main Activity buttons
+    Button Map, Progress, Stats;                                   //Main Activity buttons
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {        //Initialize HomeScreen of the application
@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         Map = findViewById(R.id.Map);
         Progress = findViewById(R.id.Progress);
+        Stats = findViewById(R.id.Stats);
 
         Map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent HistoryIntent = new Intent(MainActivity.this, RunHistoryActivity.class);     //Redirects to List of Runs
+                startActivity(HistoryIntent);
+                finish();
+            }
+        });
+
+        Stats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent HistoryIntent = new Intent(MainActivity.this, Statistics.class);     //Redirects to List of Runs
                 startActivity(HistoryIntent);
                 finish();
             }

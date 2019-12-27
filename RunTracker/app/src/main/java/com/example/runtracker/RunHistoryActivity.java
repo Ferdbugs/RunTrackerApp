@@ -61,8 +61,8 @@ public class RunHistoryActivity extends AppCompatActivity {
 
             Run run = getItem(position);
             if(run!=null) {
-                holder.display_distance.setText(String.format(Locale.ENGLISH, "%d meters",run.getDuration()/1000));
-                holder.display_duration.setText(String.format(Locale.ENGLISH, "%.02f sec", run.getDistance()));
+                holder.display_distance.setText(String.format(Locale.ENGLISH, "%.02f meters",run.getDistance()));
+                holder.display_duration.setText(String.format(Locale.ENGLISH, "%d sec",run.getDuration()/1000) );
                 holder.display_speed.setText(String.format(Locale.ENGLISH, "%.02f m/s", run.getSpeed()));
             }
 

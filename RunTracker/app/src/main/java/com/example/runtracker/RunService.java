@@ -35,6 +35,9 @@ public class RunService extends Service {
     NotificationManager manager;
     public float Distance;
     public long StartTime;
+    public float bestSpeed;
+    public float bestDistance;
+    public long longestRun;
 
     public Location NewLocation;
     public Location StartLocation;
