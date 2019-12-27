@@ -39,7 +39,7 @@ public class RunHistoryActivity extends AppCompatActivity {
         }
 
         private class holdView {
-            TextView display_distance, display_duration;            //Initialize textViews
+            TextView display_distance, display_duration,display_speed;            //Initialize textViews
         }
 
         @NonNull
@@ -52,6 +52,7 @@ public class RunHistoryActivity extends AppCompatActivity {
                 convertView = getLayoutInflater().inflate(R.layout.simple_list_item, null);
                 holder.display_distance = convertView.findViewById(R.id.displayDistance);
                 holder.display_duration = convertView.findViewById(R.id.displayDuration);
+                holder.display_speed = convertView.findViewById(R.id.Speed);
 
                 convertView.setTag(holder);
             } else {
@@ -60,8 +61,9 @@ public class RunHistoryActivity extends AppCompatActivity {
 
             Run run = getItem(position);
             if(run!=null) {
-                holder.display_duration.setText(String.format(Locale.ENGLISH, "%d",run.getDuration()/1000));
-                holder.display_distance.setText(String.format(Locale.ENGLISH, "%.02f", run.getDistance()));
+                holder.display_distance.setText(String.format(Locale.ENGLISH, "%d meters",run.getDuration()/1000));
+                holder.display_duration.setText(String.format(Locale.ENGLISH, "%.02f sec", run.getDistance()));
+                holder.display_speed.setText(String.format(Locale.ENGLISH, "%.02f m/s", run.getSpeed()));
             }
 
             return convertView;
@@ -118,7 +120,10 @@ public class RunHistoryActivity extends AppCompatActivity {
         }
     }
 
-
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();                                                                              //OnDestroy start MainActivity
+        Intent MainActivity = new Intent(this, com.example.runtracker.MainActivity.class);
+        startActivity(MainActivity);
+    }
 }

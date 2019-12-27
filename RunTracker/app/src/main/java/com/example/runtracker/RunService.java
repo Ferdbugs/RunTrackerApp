@@ -44,6 +44,8 @@ public class RunService extends Service {
     Handler timerHandler = new Handler();
     long MillisecondTime, TimeBuff, UpdateTime = 0L ;
     public State CurrentState;
+    public float speed;
+    long time;
 
     public enum State{
         Running, Paused, Stopped;
@@ -187,10 +189,11 @@ public class RunService extends Service {
         }
     }
 
-
     public void saveRun(){
+        time = (TimeBuff+MillisecondTime)/1000;
+        speed = Distance/time;
         DBHandler dbHandler = new DBHandler(this, null, null, 1);                       //Initialize DBHandler
-        Run run = new Run(Distance, TimeBuff + MillisecondTime,StartLocation,NewLocation) ;
+        Run run = new Run(Distance, TimeBuff + MillisecondTime,speed,StartLocation,NewLocation) ;
         dbHandler.addRun(run);                                                                                       //Call DBHandler add run method to add it to database
 
     }

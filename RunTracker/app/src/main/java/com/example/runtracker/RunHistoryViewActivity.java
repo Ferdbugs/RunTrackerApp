@@ -2,6 +2,7 @@ package com.example.runtracker;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -72,7 +73,7 @@ public class RunHistoryViewActivity extends FragmentActivity implements OnMapRea
         float duration = run.getDuration()/1000;
         displayDistance.setText(String.format(Locale.ENGLISH,"%.02f",distance));
         displayDuration.setText(String.format(Locale.ENGLISH,"%.02f",duration));
-        float runningSpeed = distance/duration;
+        float runningSpeed = run.getSpeed();
         String runningSpeedFinal = String.format(Locale.ENGLISH,"%.02f",runningSpeed);
         String SpeedText = (runningSpeedFinal) + " m/s";
         Speed.setText(SpeedText);
@@ -85,4 +86,5 @@ public class RunHistoryViewActivity extends FragmentActivity implements OnMapRea
         latLngInit = new LatLng(run.getInitialLocationLAT(),run.getInitialLocationLONG());
         latLngFinal = new LatLng(run.getFinalLocationLAT(),run.getFinalLocationLONG());
     }
+
 }

@@ -98,13 +98,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 runService.saveRun();
                 Toast.makeText(MapsActivity.this, "Run added", Toast.LENGTH_SHORT).show();             //Make toast to show add run
                 Distance = 0;
-                String DistanceReset = "  KM";
+                String DistanceReset = "  m";
                 distanceRan.setText(DistanceReset);
                 StartRun = null;
                 runService.changeRunState(false);
                 Timer.setText(R.string.ZeroClock);
                 finish();
-                Intent intent = new Intent(MapsActivity.this, RunHistoryActivity.class);
+                Intent Service = new Intent(MapsActivity.this,RunService.class);
+                stopService(Service);
+                Intent intent = new Intent(MapsActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

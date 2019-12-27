@@ -18,9 +18,10 @@ public class Run {
     public Run(){
     }
 
-    public Run(float distance, long duration, Location Initial, Location Final){
+    public Run(float distance, long duration,float speed, Location Initial, Location Final){
         this.distance = distance;
         this.duration = duration;
+        this.speed = speed;
         this.initialLocationLAT = Initial.getLatitude();
         this.initialLocationLONG = Initial.getLongitude();
         this.finalLocationLAT = Final.getLatitude();
