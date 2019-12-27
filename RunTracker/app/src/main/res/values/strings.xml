@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">RunTracker</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="_0_km" />
+    <string name="title_activity_run_history">RunHistoryActivity</string>
+    <string name="km">km</string>
+    <string name="no_data">No data to show</string>
+    <string name="title_activity_run_history_view">Map</string>
+    <string name="duration_label">Duration</string>
+    <string name="distance_label">Distance</string>
+    <string name="display_duration">00:00</string>
+    <string name="display_distance">0.00</string>
+    <string name="displaySpeed">Speed</string>
+    <string name="displayType">Type</string>
+    <string name="ZeroClock">00:00</string>
+</resources>
