@@ -128,10 +128,11 @@ public class RunService extends Service {
         CurrentState = State.Paused;
         timerHandler.removeCallbacks(timerRunnable);
         TimeBuff += MillisecondTime;
+        MillisecondTime = 0;
     }
 
     public void ResumeTracking(){
-        MillisecondTime = SystemClock.uptimeMillis();
+        StartTime = SystemClock.uptimeMillis();
         timerHandler.post(timerRunnable);
         CurrentState = State.Running;
     }
@@ -167,16 +168,14 @@ public class RunService extends Service {
 
 
     private void createNotificationChannel(){                               //Create Notification
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel serviceChannel = new NotificationChannel(
-                    CHANNEL_ID,
-                    "RunTracker Notification",
-                    NotificationManager.IMPORTANCE_DEFAULT
-            );
+        NotificationChannel serviceChannel = new NotificationChannel(
+                CHANNEL_ID,
+                "RunTracker Notification",
+                NotificationManager.IMPORTANCE_DEFAULT
+        );
 
-            manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(serviceChannel);
-        }
+        manager = getSystemService(NotificationManager.class);
+        manager.createNotificationChannel(serviceChannel);
     }
 
     public void changeRunState(boolean run){                                    //Change Run State for Notification

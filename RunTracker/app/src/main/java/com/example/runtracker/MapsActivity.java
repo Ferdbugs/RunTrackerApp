@@ -187,7 +187,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void UpdateDistance(float distance) {
-        distanceRan.setText(String.format(Locale.ENGLISH,"%.2f KM",distance/1000));
+        distanceRan.setText(String.format(Locale.ENGLISH,"%.2f m",distance));
     }
 
     @Override

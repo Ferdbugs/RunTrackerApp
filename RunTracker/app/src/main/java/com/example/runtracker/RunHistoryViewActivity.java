@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.List;
+import java.util.Locale;
 
 public class RunHistoryViewActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -67,19 +68,15 @@ public class RunHistoryViewActivity extends FragmentActivity implements OnMapRea
     public void displayRunData(){
         DBHandler dbHandler = new DBHandler(this, DBHandler.TABLE_RUNNER, null, 1);
         run = dbHandler.findRun(RunID);
-        displayDistance.setText(run.getDistance());
-        displayDuration.setText(run.getDuration());
-        String distance = run.getDistance();
-        String duration = run.getDuration();
-        String[] splitDistance = distance.split(" ");
-        String[] splitTime = duration.split(":");
-        Float Time = (Float.parseFloat(splitTime[0])+Float.parseFloat(splitTime[1])/60)/60;
-        Float DistanceFloat = Float.parseFloat(splitDistance[0]);
-        Float runningSpeed = DistanceFloat/Time;
-        String runningSpeedFinal = String.format("%.02f",runningSpeed);
-        String SpeedText = (runningSpeedFinal) + " Kmph";
+        float distance = run.getDistance();
+        float duration = run.getDuration()/1000;
+        displayDistance.setText(String.format(Locale.ENGLISH,"%.02f",distance));
+        displayDuration.setText(String.format(Locale.ENGLISH,"%.02f",duration));
+        float runningSpeed = distance/duration;
+        String runningSpeedFinal = String.format(Locale.ENGLISH,"%.02f",runningSpeed);
+        String SpeedText = (runningSpeedFinal) + " m/s";
         Speed.setText(SpeedText);
-        if(runningSpeed>10){
+        if(runningSpeed>2.6){
             Type.setText("Running");
         }
         else{

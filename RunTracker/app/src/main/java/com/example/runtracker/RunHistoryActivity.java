@@ -19,6 +19,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class RunHistoryActivity extends AppCompatActivity {
 
@@ -58,8 +59,10 @@ public class RunHistoryActivity extends AppCompatActivity {
             }
 
             Run run = getItem(position);
-            holder.display_duration.setText(run.getDuration());
-            holder.display_distance.setText(run.getDistance());
+            if(run!=null) {
+                holder.display_duration.setText(String.format(Locale.ENGLISH, "%d",run.getDuration()/1000));
+                holder.display_distance.setText(String.format(Locale.ENGLISH, "%.02f", run.getDistance()));
+            }
 
             return convertView;
         }
@@ -99,9 +102,9 @@ public class RunHistoryActivity extends AppCompatActivity {
             while(cursor.moveToNext()){
                 Run run = new Run();
                 run.setID(cursor.getInt(0));
-                run.setDistance(cursor.getString(1));
-                run.setDuration(cursor.getString(2));
-                run.setSpeed(cursor.getString(3));
+                run.setDistance(cursor.getFloat(1));
+                run.setDuration(cursor.getLong(2));
+                run.setSpeed(cursor.getFloat(3));
                 run.setType(cursor.getString(4));
                 run.setInitialLocationLAT(5);
                 run.setInitialLocationLONG(6);

@@ -4,9 +4,9 @@ import android.location.Location;
 
 public class Run {
     int id;
-    String distance;
-    String duration;
-    String speed;
+    float distance;
+    long duration;
+    float speed;
     String type;
     double initialLocationLAT;
     double initialLocationLONG;
@@ -19,8 +19,8 @@ public class Run {
     }
 
     public Run(float distance, long duration, Location Initial, Location Final){
-        this.distance = String.valueOf(distance);
-        this.duration = String.valueOf(duration);
+        this.distance = distance;
+        this.duration = duration;
         this.initialLocationLAT = Initial.getLatitude();
         this.initialLocationLONG = Initial.getLongitude();
         this.finalLocationLAT = Final.getLatitude();
@@ -31,15 +31,15 @@ public class Run {
         return id;
     }
 
-    public String getDistance() {
+    public float getDistance() {
         return distance;
     }
 
-    public String getDuration() {
+    public long getDuration() {
         return duration;
     }
 
-    public String getSpeed() {
+    public float getSpeed() {
         return speed;
     }
 
@@ -67,15 +67,15 @@ public class Run {
         this.id = id;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(float distance) {
         this.distance = distance;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 
-    public void setSpeed(String speed) {
+    public void setSpeed(float speed) {
         this.speed = speed;
     }
 

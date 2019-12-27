@@ -95,9 +95,9 @@ public class DBHandler extends SQLiteOpenHelper {
         Run workout = new Run();
         if (cursor.moveToFirst()) {
             workout.setID((cursor.getInt(0)));
-            workout.setDistance(cursor.getString(1));
-            workout.setDuration(cursor.getString(2));
-            workout.setSpeed(cursor.getString(3));
+            workout.setDistance(cursor.getFloat(1));
+            workout.setDuration(cursor.getLong(2));
+            workout.setSpeed(cursor.getFloat(3));
             workout.setType(cursor.getString(4));
             workout.setInitialLocationLAT(cursor.getDouble(5));
             workout.setInitialLocationLONG(cursor.getDouble(6));
