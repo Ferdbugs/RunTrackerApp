@@ -94,7 +94,7 @@ public class MyContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        myDB = new DBHandler(getContext(), null, null, 1);
+        myDB = new DBHandler(getContext());
         return false;
     }
 

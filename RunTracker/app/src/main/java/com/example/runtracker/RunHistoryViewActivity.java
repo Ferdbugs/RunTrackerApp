@@ -67,7 +67,7 @@ public class RunHistoryViewActivity extends FragmentActivity implements OnMapRea
     }
 
     public void displayRunData(){
-        DBHandler dbHandler = new DBHandler(this, DBHandler.TABLE_RUNNER, null, 1);
+        DBHandler dbHandler = new DBHandler(getApplicationContext());
         run = dbHandler.findRun(RunID);
         float distance = run.getDistance();
         float duration = run.getDuration()/1000;

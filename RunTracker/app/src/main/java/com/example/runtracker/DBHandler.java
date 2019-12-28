@@ -29,12 +29,11 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_INITIALLOCATIONLONG = "initialLocationLONG";
     public static final String COLUMN_FINALLOCATIONLAT = "finalLocationLAT";
     public static final String COLUMN_FINALLOCATIONLONG = "finalLocationLONG";
-    //public static final String COLUMN_DATE = "date";
+    private static final String COLUMN_DATE = "date";
 
 
-    public DBHandler(Context context, String name,                               //DBHandler Constructor
-                     SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+    public DBHandler(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
         myCR = context.getContentResolver();
     }
 
@@ -51,7 +50,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 COLUMN_INITIALLOCATIONLAT + " DOUBLE," +
                 COLUMN_INITIALLOCATIONLONG + " DOUBLE," +
                 COLUMN_FINALLOCATIONLAT + " DOUBLE," +
-                COLUMN_FINALLOCATIONLONG + " DOUBLE" + ")";
+                COLUMN_FINALLOCATIONLONG + " DOUBLE," +
+                COLUMN_DATE + " INTEGER" +")";
 
         db.execSQL(CREATE_RUN_TABLE);
     }
@@ -72,12 +72,13 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_INITIALLOCATIONLONG, run.getInitialLocationLONG());
         values.put(COLUMN_FINALLOCATIONLAT, run.getFinalLocationLAT());
         values.put(COLUMN_FINALLOCATIONLONG, run.getFinalLocationLONG());
+        values.put(COLUMN_DATE, run.getLongDate());
         myCR.insert(MyContentProvider.CONTENT_URI, values);
     }
 
     public boolean deleteRun(int id) {                                                 //Function to delete run from table
         boolean result = false;
-        String selection = "id = \"" + id + "\"";
+        String selection = "_id = \"" + id + "\"";
         int rowsDeleted = myCR.delete(MyContentProvider.CONTENT_URI,
                 selection, null);
         if (rowsDeleted > 0)
@@ -87,7 +88,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public Run findRun(int id){                                                        //Function to find run in table
         String [] projection = {COLUMN_ID, COLUMN_RUNDISTANCE,
-                COLUMN_RUNDURATION, COLUMN_RUNSPEED, COLUMN_WORKOUTTYPE, COLUMN_INITIALLOCATIONLAT,COLUMN_INITIALLOCATIONLONG, COLUMN_FINALLOCATIONLAT,COLUMN_FINALLOCATIONLONG };
+                COLUMN_RUNDURATION, COLUMN_RUNSPEED, COLUMN_WORKOUTTYPE, COLUMN_INITIALLOCATIONLAT,COLUMN_INITIALLOCATIONLONG, COLUMN_FINALLOCATIONLAT,COLUMN_FINALLOCATIONLONG,COLUMN_DATE };
         String selection = "_id = \"" + id + "\"";
         Cursor cursor = myCR.query(MyContentProvider.CONTENT_URI,
                 projection, selection, null,
@@ -103,6 +104,7 @@ public class DBHandler extends SQLiteOpenHelper {
             workout.setInitialLocationLONG(cursor.getDouble(6));
             workout.setFinalLocationLAT(cursor.getDouble(7));
             workout.setFinalLocationLONG(cursor.getDouble(8));
+            workout.setDate(cursor.getLong(9));
             cursor.close();
         } else {
             workout = null;

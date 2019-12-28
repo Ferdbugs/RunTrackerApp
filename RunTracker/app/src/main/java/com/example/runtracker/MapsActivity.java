@@ -206,6 +206,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(myConnection);
+    }
+
+    @Override
     public void UpdateLocation(Location location) {
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         if(FirstLocation==null){

@@ -2,9 +2,9 @@ package com.example.runtracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -27,7 +27,7 @@ public class Statistics extends AppCompatActivity {
     }
 
     public void displayData(){
-        DBHandler dbhandler = new DBHandler(getApplicationContext(), DBHandler.TABLE_RUNNER, null ,2);  //Uses DBHandler for setting the data to the Run model and adds the run model to the listview
+        DBHandler dbhandler = new DBHandler(getApplicationContext());  //Uses DBHandler for setting the data to the Run model and adds the run model to the listview
         Cursor cursor = dbhandler.showList();
             while(cursor.moveToNext()){
                 if(bestDistance<cursor.getFloat(1)) {
@@ -40,5 +40,12 @@ public class Statistics extends AppCompatActivity {
         BestDistance.setText(String.format(Locale.ENGLISH,"%.02f m",bestDistance));
         BestRun.setText(String.format(Locale.ENGLISH,"%.02f m/s",bestSpeed));
         }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent MainActivity = new Intent(Statistics.this, com.example.runtracker.MainActivity.class);
+        startActivity(MainActivity);
     }
+}
 

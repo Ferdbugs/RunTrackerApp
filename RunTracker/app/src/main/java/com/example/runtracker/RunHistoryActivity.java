@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,7 +33,7 @@ public class RunHistoryActivity extends AppCompatActivity {
 
     //Activity to show the List of Runs by the user
 
-    // Custom adapter for displaying Run Objects in the listview
+    // Custom adapter for displaying Run Objects in the listView
 
     private class CustomAdapter extends ArrayAdapter<Run> {
         public CustomAdapter(@NonNull Context context, int resource, @NonNull List<Run> objects) {
@@ -39,12 +41,13 @@ public class RunHistoryActivity extends AppCompatActivity {
         }
 
         private class holdView {
-            TextView display_distance, display_duration,display_speed;            //Initialize textViews
+            TextView display_distance, display_duration,display_speed, getDisplay_date;            //Initialize textViews
+            ImageView delete;
         }
 
         @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             holdView holder;
 
             if (convertView == null) {
@@ -53,17 +56,29 @@ public class RunHistoryActivity extends AppCompatActivity {
                 holder.display_distance = convertView.findViewById(R.id.displayDistance);
                 holder.display_duration = convertView.findViewById(R.id.displayDuration);
                 holder.display_speed = convertView.findViewById(R.id.Speed);
+                holder.getDisplay_date = convertView.findViewById(R.id.Date);
+                holder.delete = convertView.findViewById(R.id.delete);
 
                 convertView.setTag(holder);
             } else {
                 holder = (holdView) convertView.getTag();
             }
 
-            Run run = getItem(position);
+            final Run run = getItem(position);
             if(run!=null) {
                 holder.display_distance.setText(String.format(Locale.ENGLISH, "%.02f meters",run.getDistance()));
                 holder.display_duration.setText(String.format(Locale.ENGLISH, "%d sec",run.getDuration()/1000) );
                 holder.display_speed.setText(String.format(Locale.ENGLISH, "%.02f m/s", run.getSpeed()));
+                holder.getDisplay_date.setText(run.getDate());
+                holder.delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DBHandler handler = new DBHandler(getApplicationContext());
+                        handler.deleteRun(run.getID());
+                        listItem.remove(position);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
             }
 
             return convertView;
@@ -92,8 +107,9 @@ public class RunHistoryActivity extends AppCompatActivity {
 
     }
 
+
     public void displayData(){
-        DBHandler dbhandler = new DBHandler(getApplicationContext(), DBHandler.TABLE_RUNNER, null ,2);  //Uses DBHandler for setting the data to the Run model and adds the run model to the listview
+        DBHandler dbhandler = new DBHandler(getApplicationContext());  //Uses DBHandler for setting the data to the Run model and adds the run model to the listview
         Cursor cursor = dbhandler.showList();
 
         if(cursor.getCount() ==0){
@@ -108,10 +124,7 @@ public class RunHistoryActivity extends AppCompatActivity {
                 run.setDuration(cursor.getLong(2));
                 run.setSpeed(cursor.getFloat(3));
                 run.setType(cursor.getString(4));
-                run.setInitialLocationLAT(5);
-                run.setInitialLocationLONG(6);
-                run.setInitialLocationLAT(7);
-                run.setInitialLocationLONG(8);
+                run.setDate(cursor.getLong(9));
 
                 listItem.add(run);
             }
@@ -121,8 +134,8 @@ public class RunHistoryActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();                                                                              //OnDestroy start MainActivity
+    public void onBackPressed() {
+        super.onBackPressed();
         Intent MainActivity = new Intent(this, com.example.runtracker.MainActivity.class);
         startActivity(MainActivity);
     }

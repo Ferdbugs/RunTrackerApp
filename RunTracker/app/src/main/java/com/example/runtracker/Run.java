@@ -2,24 +2,27 @@ package com.example.runtracker;
 
 import android.location.Location;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Run {
-    int id;
-    float distance;
-    long duration;
-    float speed;
-    float bestSpeed;
-    String type;
-    double initialLocationLAT;
-    double initialLocationLONG;
-    double finalLocationLAT;
-    double finalLocationLONG;
+    private int id;
+    private float distance;
+    private long duration;
+    private float speed;
+    private String type;
+    private double initialLocationLAT;
+    private double initialLocationLONG;
+    private double finalLocationLAT;
+    private double finalLocationLONG;
+    private long date;
 
     //Runner model with declared variables,getters and setters
 
     public Run(){
     }
 
-    public Run(float distance, long duration,float speed, Location Initial, Location Final){
+    public Run(float distance, long duration,float speed, Location Initial, Location Final,long Date){
         this.distance = distance;
         this.duration = duration;
         this.speed = speed;
@@ -27,6 +30,7 @@ public class Run {
         this.initialLocationLONG = Initial.getLongitude();
         this.finalLocationLAT = Final.getLatitude();
         this.finalLocationLONG = Final.getLongitude();
+        setDate(Date);
     }
 
     public int getID() {
@@ -102,4 +106,16 @@ public class Run {
         this.finalLocationLONG = finalLocationLONG;
     }
 
+    public String getDate() {
+        return new SimpleDateFormat("dd/MM/yyyy").format(new Date(date));
+    }
+
+    public long getLongDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        long trim = date % (24*3600*1000);
+        this.date = date-trim;
+    }
 }
