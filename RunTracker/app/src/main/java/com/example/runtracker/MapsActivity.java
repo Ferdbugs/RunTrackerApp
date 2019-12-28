@@ -1,11 +1,14 @@
 package com.example.runtracker;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
 import android.content.ComponentName;
 
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -104,6 +107,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 runService.changeRunState(false);
                 Timer.setText(R.string.ZeroClock);
                 finish();
+
                 Intent Service = new Intent(MapsActivity.this,RunService.class);
                 stopService(Service);
                 Intent intent = new Intent(MapsActivity.this, MainActivity.class);
@@ -142,17 +146,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {                                       //OnMapReady initialize the map with co-ordinates and set polylines on user travelled paths
         mMap = googleMap;
-        mMap.setMyLocationEnabled(true);
 
         PolylineOptions polylineOptions = new PolylineOptions();
         polylineOptions.color(Color.RED);
         polylineOptions.width(6);
         polyline = mMap.addPolyline(polylineOptions);
 
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        } else {
+            startRunService();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == 1) {
+            if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                startRunService();
+            } else finish();
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private void startRunService(){
         Intent intent = new Intent(this, RunService.class);                //Start Service
         if(bindService(intent, myConnection,0)){
             startService(intent);
         }
+        mMap.setMyLocationEnabled(true);
     }
 
     private void UpdateUI(){

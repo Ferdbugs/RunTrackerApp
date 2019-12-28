@@ -7,50 +7,202 @@
     tools:context=".Statistics">
 
     <TextView
-        android:id="@+id/BestRun"
+        android:id="@+id/longestDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="80dp"
         android:text="TextView"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.287"
+        app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/longRun" />
+        app:layout_constraintTop_toBottomOf="@+id/BestRun" />
 
     <TextView
-        android:id="@+id/longRun"
+        android:id="@+id/BestRun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="184dp"
-        android:text="Best Speed"
-        android:textSize="28sp"
+        android:layout_marginTop="60dp"
+        android:text="Best Distance"
+        android:textStyle="bold"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.129"
+        app:layout_constraintHorizontal_bias="0.148"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/fastRun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Best Speed"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toEndOf="@+id/BestRun"
+        app:layout_constraintTop_toTopOf="@+id/BestRun" />
+
+    <TextView
+        android:id="@+id/fastestRun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="72dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.876"
+        app:layout_constraintStart_toEndOf="@+id/longestDistance"
+        app:layout_constraintTop_toBottomOf="@+id/fastRun" />
+
+    <TextView
+        android:id="@+id/longRunWeek"
+        android:layout_width="160dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="188dp"
+        android:text="Longest Run This Week"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/longWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Best Distance"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toEndOf="@+id/longRun"
-        app:layout_constraintTop_toTopOf="@+id/longRun" />
-
-    <TextView
-        android:id="@+id/LongestDistance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="280dp"
         android:text="TextView"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/BestRun"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/fastRun" />
+
+    <TextView
+        android:id="@+id/FastRunWeek"
+        android:layout_width="157dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="188dp"
+        android:text="Fastest Run This Week"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.893"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/FastWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="76dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintStart_toEndOf="@+id/longestDistance"
+        app:layout_constraintTop_toBottomOf="@+id/fastRun" />
+
+    <TextView
+        android:id="@+id/FastRunMonth"
+        android:layout_width="157dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="348dp"
+        android:text="Fastest Run This Month"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.893"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/FastMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="76dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintStart_toEndOf="@+id/longestDistance"
+        app:layout_constraintTop_toBottomOf="@+id/fastRun" />
+
+    <TextView
+        android:id="@+id/longRunMonth"
+        android:layout_width="160dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="348dp"
+        android:text="Longest Run This Month"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/longMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="272dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fastRun" />
+
+    <TextView
+        android:id="@+id/totalDistanceRan"
+        android:layout_width="172dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="488dp"
+        android:text="Distance Ran"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.146"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/totalDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="440dp"
+        android:layout_marginEnd="268dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fastRun" />
+
+    <TextView
+        android:id="@+id/averageSpeed"
+        android:layout_width="196dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="488dp"
+        android:text="Average Speed"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.967"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/avgSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="440dp"
+        android:layout_marginEnd="88dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fastRun" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
