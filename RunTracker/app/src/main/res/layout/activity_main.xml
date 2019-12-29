@@ -6,34 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/Progress"
-        android:layout_width="182dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="216dp"
-        android:text="Progress Tracker"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
+    <ImageView
         android:id="@+id/Map"
-        android:layout_width="112dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="216dp"
-        android:layout_marginEnd="48dp"
-        android:text="Map"
+        android:layout_width="780dp"
+        android:layout_height="402dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/flash" />
 
-    <Button
+    <ImageView
+        android:id="@+id/Progress"
+        android:layout_width="316dp"
+        android:layout_height="401dp"
+        android:layout_marginStart="220dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/track" />
+
+    <ImageView
         android:id="@+id/Stats"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Personal Best"
+        android:layout_width="699dp"
+        android:layout_height="318dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Progress" />
+        app:layout_constraintTop_toBottomOf="@+id/Progress"
+        app:layout_constraintVertical_bias="0.313"
+        app:srcCompat="@drawable/record" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

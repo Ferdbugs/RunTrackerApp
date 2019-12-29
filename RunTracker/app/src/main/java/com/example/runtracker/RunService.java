@@ -4,10 +4,12 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
+import android.net.ConnectivityManager;
 import android.os.Binder;
-import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -50,6 +52,8 @@ public class RunService extends Service {
     public float speed;
     long time;
     long date;
+    BroadcastReceiver br = new MyBroadcastReceiver();
+
 
     public enum State{
         Running, Paused, Stopped;
@@ -105,6 +109,11 @@ public class RunService extends Service {
         final Intent notificationIntent = new Intent(this, MapsActivity.class);             //OnServiceStart
         notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
+
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        filter.addAction(Intent.ACTION_BATTERY_LOW);
+        this.registerReceiver(br, filter);
+
 
         builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("New Activity")

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -42,11 +43,10 @@ public class Statistics extends AppCompatActivity {
         DBHandler dbhandler = new DBHandler(getApplicationContext());  //Uses DBHandler for setting the data to the Run model and adds the run model to the listview
         Cursor cursor = dbhandler.showList();
             while(cursor.moveToNext()){
+                totalDistance = totalDistance + cursor.getFloat(1);
+                time = time + cursor.getLong(2);
                 if(bestDistance<cursor.getFloat(1)) {
                     bestDistance = (cursor.getFloat(1));
-                    totalDistance = totalDistance + cursor.getFloat(1);
-                    time = time + cursor.getLong(2);
-
                 }
                 if(bestSpeed<cursor.getFloat(3)) {
                     bestSpeed = (cursor.getFloat(3));
